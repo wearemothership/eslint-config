@@ -13,12 +13,27 @@ export default tseslint.config(
 	{ ignores: ["dist", "public"] },
 	pluginJsxA11y.flatConfigs.recommended,
 	pluginPromise.configs["flat/recommended"],
-	{ // Applies the default typescript and react eslint styles
+	{ // Applies the default typescript eslint styles and promise rules
 		extends: [
 			js.configs.recommended,
 			...configs.recommended
 		],
 		files: ["**/*.{ts,tsx}"],
+		languageOptions: {
+			ecmaVersion: 2020,
+			globals: globals.browser
+		},
+		rules: {
+			"promise/always-return": ["error", { ignoreLastCallback: true }],
+			"promise/catch-or-return": ["error", { allowFinally: true }]
+		}
+	},
+	{ // Applies React-specific rules only to TSX files
+		extends: [
+			js.configs.recommended,
+			...configs.recommended
+		],
+		files: ["**/*.tsx"],
 		languageOptions: {
 			ecmaVersion: 2020,
 			globals: globals.browser
@@ -32,9 +47,7 @@ export default tseslint.config(
 			"react-refresh/only-export-components": [
 				"warn",
 				{ allowConstantExport: true }
-			],
-			"promise/always-return": ["error", { ignoreLastCallback: true }],
-			"promise/catch-or-return": ["error", { allowFinally: true }]
+			]
 		}
 	},
 	{ // Adds our own stylistic rules.
