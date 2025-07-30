@@ -62,7 +62,6 @@ export default tseslint.config(
 			"@stylistic/comma-spacing": ["error"],
 			"@stylistic/implicit-arrow-linebreak": ["error", "beside"],
 			"@stylistic/indent": ["error", "tab"],
-			"@stylistic/jsx-indent": ["error", "tab"],
 			"@stylistic/linebreak-style": ["error", "unix"],
 			"@stylistic/max-len": ["error", { code: 150 }],
 			"@stylistic/multiline-ternary": ["error", "always-multiline"],
