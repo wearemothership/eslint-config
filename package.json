@@ -1,6 +1,6 @@
 {
   "name": "@wearemothership/eslint-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "peerDependencies": {
     "@eslint/js": "^9.30.1",
@@ -13,6 +13,7 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint": "^9.30.1",
     "globals": "^16.3.0",
+    "typescript": "^5.8.3",
     "typescript-eslint": "^8.36.0"
   }
 }
