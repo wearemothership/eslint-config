@@ -1,6 +1,6 @@
 {
   "name": "@wearemothership/eslint-config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "index.js",
   "peerDependencies": {
     "@eslint/js": "^9.32.0",
