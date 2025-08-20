@@ -41,6 +41,7 @@ export default tseslint.config(
 		},
 		plugins: {
 			"react-hooks": reactHooks,
+			"react": pluginReact,
 			"react-refresh": reactRefresh
 		},
 		rules: {
