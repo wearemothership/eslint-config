@@ -46,11 +46,8 @@ export default tseslint.config(
 		rules: {
 			...reactHooks.configs.recommended.rules,
 			"@stylistic/jsx-closing-tag-location": "error",
-			"@stylistic/jsx-closing-bracket-location": "error",
 			"@stylistic/jsx-curly-spacing": "error",
 			"@stylistic/jsx-equals-spacing": "error",
-			"@stylistic/jsx-indent": "error",
-			"@stylistic/jsx-indent-props": "error",
 			"@stylistic/jsx-tag-spacing": "error",
 			"@stylistic/jsx-quotes": "error",
 			"@stylistic/jsx-self-closing-comp": "error",
