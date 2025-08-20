@@ -3,7 +3,6 @@ import stylistic from "@stylistic/eslint-plugin";
 import pluginImport from "eslint-plugin-import";
 import pluginJsxA11y from "eslint-plugin-jsx-a11y";
 import pluginPromise from "eslint-plugin-promise";
-import pluginReact from "eslint-plugin-react";
 import * as reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
@@ -21,7 +20,7 @@ export default tseslint.config(
 		],
 		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
-			ecmaVersion: 2020,
+			ecmaVersion: 2022,
 			globals: globals.browser
 		},
 		rules: {
@@ -36,21 +35,25 @@ export default tseslint.config(
 		],
 		files: ["**/*.tsx"],
 		languageOptions: {
-			ecmaVersion: 2020,
+			ecmaVersion: 2022,
 			globals: globals.browser
 		},
 		plugins: {
+			"@stylistic": stylistic,
 			"react-hooks": reactHooks,
-			"react": pluginReact,
 			"react-refresh": reactRefresh
 		},
 		rules: {
 			...reactHooks.configs.recommended.rules,
-			...pluginReact.configs.flat.recommended.rules,
-			"react/jsx-closing-tag-location": "error",
-			"react/jsx-closing-bracket-location": "error",
-			"react/jsx-closing-bracket-newline": "error",
-			"react/jsx-closing-bracket-spacing": "error",
+			"@stylistic/jsx-closing-tag-location": "error",
+			"@stylistic/jsx-closing-bracket-location": "error",
+			"@stylistic/jsx-curly-spacing": "error",
+			"@stylistic/jsx-equals-spacing": "error",
+			"@stylistic/jsx-indent": "error",
+			"@stylistic/jsx-indent-props": "error",
+			"@stylistic/jsx-tag-spacing": "error",
+			"@stylistic/jsx-quotes": "error",
+			"@stylistic/jsx-self-closing-comp": "error",
 			"react-refresh/only-export-components": [
 				"warn",
 				{ allowConstantExport: true }
