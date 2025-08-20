@@ -51,6 +51,10 @@ export default tseslint.config(
 			"@stylistic/jsx-tag-spacing": "error",
 			"@stylistic/jsx-quotes": "error",
 			"@stylistic/jsx-self-closing-comp": "error",
+			"@stylistic/jsx-tag-spacing": ["error", {
+				"afterOpening": "never",
+				"beforeClosing": "never"
+			}],
 			"react-refresh/only-export-components": [
 				"warn",
 				{ allowConstantExport: true }
