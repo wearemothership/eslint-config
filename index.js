@@ -6,17 +6,17 @@ import pluginPromise from "eslint-plugin-promise";
 import * as reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import globals from "globals";
-import tseslint, { configs } from "typescript-eslint";
+import tseslint from "typescript-eslint";
+import { defineConfig } from "eslint/config";
 
-
-export default tseslint.config(
+export default defineConfig(
 	{ ignores: ["dist", "public"] },
 	pluginJsxA11y.flatConfigs.recommended,
 	pluginPromise.configs["flat/recommended"],
 	{ // Applies the default typescript eslint styles and promise rules
 		extends: [
 			js.configs.recommended,
-			...configs.recommended
+			tseslint.configs.recommended
 		],
 		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
@@ -24,15 +24,28 @@ export default tseslint.config(
 			globals: globals.browser
 		},
 		rules: {
+			"arrow-body-style": ["error", "as-needed"],
+			"no-shadow": ["error"],
+			"no-await-in-loop": "error",
+			"no-constructor-return": "error",
+			"no-duplicate-imports": "error",
+			"no-unassigned-vars": "warn",
+			"no-use-before-define": ["error", { functions: false }], // Functions are hoisted
+			"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+			"max-params": ["warn", { max: 4 }],
+			"no-console": ["warn", { "allow": ["warn", "error", "debug"] }],
+			"no-else-return": "warn",
+			"no-eval": "error",
+			"no-nested-ternary": "warn",
+			"no-param-reassign": ["warn", { "ignorePropertyModificationsFor": ["draft"] }],
+			"no-unused-expressions": "warn",
 			"promise/always-return": ["error", { ignoreLastCallback: true }],
-			"promise/catch-or-return": ["error", { allowFinally: true }]
+			"promise/catch-or-return": ["error", { allowFinally: true }],
+			"require-await": "warn",
+			"@typescript-eslint/consistent-type-assertions": "warn"
 		}
 	},
 	{ // Applies React-specific rules only to TSX files
-		extends: [
-			js.configs.recommended,
-			...configs.recommended
-		],
 		files: ["**/*.tsx"],
 		languageOptions: {
 			ecmaVersion: 2022,
@@ -45,16 +58,7 @@ export default tseslint.config(
 		},
 		rules: {
 			...reactHooks.configs.recommended.rules,
-			"@stylistic/jsx-closing-tag-location": "error",
-			"@stylistic/jsx-curly-spacing": "error",
-			"@stylistic/jsx-equals-spacing": "error",
-			"@stylistic/jsx-tag-spacing": "error",
-			"@stylistic/jsx-quotes": "error",
-			"@stylistic/jsx-self-closing-comp": "error",
-			"@stylistic/jsx-tag-spacing": ["error", {
-				"afterOpening": "never",
-				"beforeClosing": "never"
-			}],
+			"react-hooks/exhaustive-deps": "error",
 			"react-refresh/only-export-components": [
 				"warn",
 				{ allowConstantExport: true }
@@ -62,35 +66,47 @@ export default tseslint.config(
 		}
 	},
 	{ // Adds our own stylistic rules.
+		extends: [
+			stylistic.configs.recommended
+		],
 		plugins: {
 			"@stylistic": stylistic
 		},
 		rules: {
-			"@stylistic/arrow-parens": "error",
-			"@stylistic/arrow-spacing": ["error"],
+			"@stylistic/arrow-parens": ["error", "always"],
 			"@stylistic/brace-style": [2, "stroustrup"],
 			"@stylistic/comma-dangle": ["error", "never"],
-			"@stylistic/comma-spacing": ["error"],
 			"@stylistic/implicit-arrow-linebreak": ["error", "beside"],
 			"@stylistic/indent": ["error", "tab"],
+			"@stylistic/indent-binary-ops": ["error", "tab"],
+			"@stylistic/jsx-indent-props": ["error", "tab"],
 			"@stylistic/linebreak-style": ["error", "unix"],
+			"@stylistic/jsx-self-closing-comp": "error",
+			"@stylistic/jsx-tag-spacing": ["error", {
+				"afterOpening": "never",
+				"beforeClosing": "never"
+			}],
 			"@stylistic/max-len": ["error", { code: 150 }],
+			"@stylistic/member-delimiter-style": ["error", {
+				"multiline": {
+					"delimiter": "semi",
+					"requireLast": true
+				},
+				"singleline": {
+					"delimiter": "semi",
+					"requireLast": false
+				},
+				"multilineDetection": "brackets"
+			}],
 			"@stylistic/multiline-ternary": ["error", "always-multiline"],
-			"@stylistic/new-parens": "error",
 			"@stylistic/no-extra-semi": "error",
-			"@stylistic/no-mixed-operators": "error",
-			"@stylistic/no-mixed-spaces-and-tabs": "error",
-			"@stylistic/no-multi-spaces": "error",
 			"@stylistic/no-tabs": "off",
-			"@stylistic/no-whitespace-before-property": "error",
 			"@stylistic/object-curly-newline": ["error", { minProperties: 4, consistent: true }],
 			"@stylistic/object-curly-spacing": ["error", "always"],
 			"@stylistic/operator-linebreak": ["error", "before"],
 			"@stylistic/quotes": ["error", "double"],
-			"@stylistic/semi": ["error", "always"],
-			"@stylistic/type-annotation-spacing": "error",
-			"@stylistic/type-generic-spacing": "error",
-			"@stylistic/type-named-tuple-spacing": "error"
+			"@stylistic/quote-props": ["error", "as-needed"],
+			"@stylistic/semi": ["error", "always"]
 		}
 	},
 	pluginImport.flatConfigs.recommended,
