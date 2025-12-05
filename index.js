@@ -10,7 +10,7 @@ import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig(
-	{ ignores: ["dist", "public"] },
+	{ ignores: ["**/dist/", "**/public/"] },
 	pluginJsxA11y.flatConfigs.recommended,
 	pluginPromise.configs["flat/recommended"],
 	{ // Applies the default typescript eslint styles and promise rules
@@ -20,13 +20,12 @@ export default defineConfig(
 		],
 		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: 2024,
 			globals: globals.browser
 		},
 		rules: {
 			"arrow-body-style": ["error", "as-needed"],
 			"no-shadow": ["error", { ignoreOnInitialization: true }],
-			"no-await-in-loop": "error",
 			"no-constructor-return": "error",
 			"no-duplicate-imports": "error",
 			"no-unassigned-vars": "warn",
@@ -48,7 +47,7 @@ export default defineConfig(
 	{ // Applies React-specific rules only to TSX files
 		files: ["**/*.tsx"],
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: 2024,
 			globals: globals.browser
 		},
 		plugins: {
