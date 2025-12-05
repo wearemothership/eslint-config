@@ -10,7 +10,7 @@ import tseslint from "typescript-eslint";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig(
-	{ ignores: ["dist", "public"] },
+	{ ignores: ["**/dist/", "**/public/"] },
 	pluginJsxA11y.flatConfigs.recommended,
 	pluginPromise.configs["flat/recommended"],
 	{ // Applies the default typescript eslint styles and promise rules
@@ -20,24 +20,23 @@ export default defineConfig(
 		],
 		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: 2024,
 			globals: globals.browser
 		},
 		rules: {
 			"arrow-body-style": ["error", "as-needed"],
-			"no-shadow": ["error"],
-			"no-await-in-loop": "error",
+			"no-shadow": ["error", { ignoreOnInitialization: true }],
 			"no-constructor-return": "error",
 			"no-duplicate-imports": "error",
 			"no-unassigned-vars": "warn",
 			"no-use-before-define": ["error", { functions: false }], // Functions are hoisted
-			"func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+			"func-style": ["error", "declaration", { allowArrowFunctions: true }],
 			"max-params": ["warn", { max: 4 }],
 			"no-console": ["warn", { "allow": ["warn", "error", "debug"] }],
 			"no-else-return": "warn",
 			"no-eval": "error",
 			"no-nested-ternary": "warn",
-			"no-param-reassign": ["warn", { "ignorePropertyModificationsFor": ["draft"] }],
+			"no-param-reassign": ["warn", { ignorePropertyModificationsFor: ["draft"] }],
 			"no-unused-expressions": "warn",
 			"promise/always-return": ["error", { ignoreLastCallback: true }],
 			"promise/catch-or-return": ["error", { allowFinally: true }],
@@ -48,7 +47,7 @@ export default defineConfig(
 	{ // Applies React-specific rules only to TSX files
 		files: ["**/*.tsx"],
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: 2024,
 			globals: globals.browser
 		},
 		plugins: {
