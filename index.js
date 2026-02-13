@@ -44,8 +44,8 @@ export default defineConfig(
 			"@typescript-eslint/consistent-type-assertions": "warn"
 		}
 	},
-	{ // Applies React-specific rules only to TSX files
-		files: ["**/*.tsx"],
+	{ // Applies React-specific rules - for both hooks and TSX files
+		files: ["**/*.{ts,tsx}"],
 		languageOptions: {
 			ecmaVersion: 2024,
 			globals: globals.browser
