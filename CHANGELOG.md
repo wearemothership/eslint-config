@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## 2.0.1 — 2026-06-24
+
+Patch release fixing file-scoping regressions introduced in 2.0.0.
+
+### Fixes
+
+#### React hooks rules apply to `.js`, `.jsx`, `.ts`, and `.tsx` again
+
+2.0.0 scoped `react-hooks` and `react-refresh` to `**/*.{tsx,jsx}` only. Custom hooks are commonly authored in plain `.ts` or `.js` files, so those rules did not run where needed. This caused ESLint errors such as **"Definition for rule 'react-hooks/refs' was not found"** when linting hook files outside the TSX/JSX glob.
+
+Restored to `**/*.{js,jsx,ts,tsx}` (matching v1.x intent from PR #5, extended to JS). jsx-a11y remains scoped to `**/*.{tsx,jsx}`.
+
+#### Core quality rules shared across JavaScript and TypeScript
+
+Core rules (`no-console`, `no-eval`, `func-style`, `no-duplicate-imports`, promise overrides, etc.) and `@eslint/js` recommended were bundled inside the TypeScript-only config block in 2.0.0. `.js` / `.jsx` files only received stylistic and React rules.
+
+Split into a `languageAgnostic` block (`**/*.{js,jsx,mjs,cjs,ts,tsx}`) and a separate `typescript` block (`**/*.{ts,tsx}`) for `typescript-eslint` only. TypeScript files behave as before; JavaScript files now get the same core rules.
+
+### Updated exports table
+
+| Export | Contents |
+|--------|----------|
+| `base` | Ignores, promise, language-agnostic rules, TypeScript, stylistic |
+| `react` | jsx-a11y (TSX/JSX), react-hooks, react-refresh (JS/JSX/TS/TSX) |
+| `importConfig` | Import rules; `import/no-unresolved` for JS only |
+| `default` | `base` + `react` |
+
 ## 2.0.0 — 2026-06-24
 
 Major release focused on ESLint performance and clearer config composition.
