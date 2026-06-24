@@ -5,7 +5,7 @@ ESLint configuration for TypeScript and React projects with strict code quality 
 ## Features
 
 - **TypeScript Support**: Full TypeScript and TSX support with recommended rules
-- **React Integration**: React Hooks and React Refresh rules for TSX/JSX files
+- **React Integration**: React Hooks and React Refresh rules for `.js`, `.jsx`, `.ts`, and `.tsx` files
 - **Accessibility**: JSX A11y rules scoped to TSX/JSX only
 - **Code Style**: Consistent code formatting with Stylistic ESLint plugin
 - **Import Management**: Optional import/export validation (JavaScript only for unresolved imports)
@@ -111,7 +111,7 @@ Add `.eslintcache` to `.gitignore`. The cache is safe to delete at any time.
 | Export | Contents |
 |--------|----------|
 | `base` | Ignores, promise, TypeScript, stylistic |
-| `react` | jsx-a11y, react-hooks, react-refresh (TSX/JSX only) |
+| `react` | jsx-a11y (TSX/JSX), react-hooks, react-refresh (JS/JSX/TS/TSX) |
 | `importConfig` | Import/export rules; `import/no-unresolved` for `.js` only |
 | default | `base` + `react` |
 
@@ -126,7 +126,7 @@ Add `.eslintcache` to `.gitignore`. The cache is safe to delete at any time.
 
 - **React Hooks**: Enforces Rules of Hooks
 - **React Refresh**: Warns about components that might break Fast Refresh
-- Applied only to `.tsx` and `.jsx` files
+- Applied to `.js`, `.jsx`, `.ts`, and `.tsx` files (custom hooks are not always in TSX)
 
 ### Code Style Rules
 

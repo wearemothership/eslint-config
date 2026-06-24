@@ -11,12 +11,13 @@ import { defineConfig } from "eslint/config";
 
 const ignores = { ignores: ["**/dist/", "**/public/"] };
 
-const typescript = {
+const sourceFiles = ["**/*.{js,jsx,mjs,cjs,ts,tsx}"];
+
+const languageAgnostic = {
 	extends: [
-		js.configs.recommended,
-		tseslint.configs.recommended
+		js.configs.recommended
 	],
-	files: ["**/*.{ts,tsx}"],
+	files: sourceFiles,
 	languageOptions: {
 		ecmaVersion: 2024,
 		globals: globals.browser
@@ -38,7 +39,20 @@ const typescript = {
 		"no-unused-expressions": "warn",
 		"promise/always-return": ["error", { ignoreLastCallback: true }],
 		"promise/catch-or-return": ["error", { allowFinally: true }],
-		"require-await": "warn",
+		"require-await": "warn"
+	}
+};
+
+const typescript = {
+	extends: [
+		tseslint.configs.recommended
+	],
+	files: ["**/*.{ts,tsx}"],
+	languageOptions: {
+		ecmaVersion: 2024,
+		globals: globals.browser
+	},
+	rules: {
 		"@typescript-eslint/consistent-type-assertions": "warn"
 	}
 };
@@ -94,7 +108,7 @@ const jsxA11y = {
 };
 
 const reactRules = {
-	files: ["**/*.{tsx,jsx}"],
+	files: ["**/*.{js,jsx,ts,tsx}"],
 	languageOptions: {
 		ecmaVersion: 2024,
 		globals: globals.browser
@@ -148,11 +162,12 @@ const importUnresolvedJs = {
 export const base = defineConfig(
 	ignores,
 	pluginPromise.configs["flat/recommended"],
+	languageAgnostic,
 	typescript,
 	stylisticRules
 );
 
-/** React hooks, refresh, and jsx-a11y — scoped to TSX/JSX only. */
+/** React hooks, refresh, and jsx-a11y. */
 export const react = defineConfig(
 	jsxA11y,
 	reactRules
